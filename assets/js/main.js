@@ -1,10 +1,9 @@
 /*=============== SHOW MENU ===============*/
 const navMenu = document.querySelector('#nav-menu'),
-        navToggle = document.querySelector('#nav-toggle'),
-        navClose = document.querySelector('#nav-close')
+      navToggle = document.querySelector('#nav-toggle'),
+      navClose = document.querySelector('#nav-close')
 
 /*========= MENU SHOW =========*/
-//Validar se a constante existe
 if(navToggle){
     navToggle.addEventListener('click', () => {
         navMenu.classList.add('show-menu')
@@ -12,30 +11,24 @@ if(navToggle){
 } 
 
 /*========= MENU HIDDEN =========*/
-//Validar se a constante existe
 if(navClose) {
     navClose.addEventListener('click', () => {
         navMenu.classList.remove('show-menu')
     })
 }
 
-
 /*=============== REMOVE MENU MOBILE ===============*/
 const navLink = document.querySelectorAll('.nav__link')
 
 const linkAction = () => {
     const navMenu = document.getElementById('nav-menu')
-    //quando clicado em cada 'nav__link', será removida a classe 'show-menu'
     navMenu.classList.remove('show-menu')
 }
 navLink.forEach(n => n.addEventListener('click', linkAction))
 
-
-
 /*=============== SHADOW HEADER ===============*/
 const shadowlHeader = () =>{
     const header = document.getElementById('header')
-    // When the scroll is greater than 50 viewport height, add the shadow-header class to the header tag
     this.scrollY >= 50 ? header.classList.add('shadow-header') 
                        : header.classList.remove('shadow-header')
 }
@@ -45,42 +38,33 @@ window.addEventListener('scroll', shadowlHeader)
 const contactForm = document.getElementById('contact-form'),
       contactMessage = document.getElementById('contact-message')
 
-const sendEmail = (e) =>{
+const sendEmail = (e) => {
     e.preventDefault()
 
-    // serviceID - templateID - #form - publicKey
-    emailjs.sendForm('service_hp1m2mh','template_z56cid4','#contact-form','Fvu4N2-utszga0O2w')
+    emailjs.sendForm('service_gz1xkfn', 'template_6554fix', '#contact-form', '07egxRQQH1ETiCuul')
     .then(() => {
-           // Show sent message
-           contactMessage.textContent = 'Message sent successfully ✅'
-
-            // Remove message after five seconds
-            setTimeout(() => {
-                contactMessage.textContent = ''
-            }, 5000)
-             // Clear input fields
-             contactForm.reset()
+        contactMessage.textContent = 'Message sent successfully ✅'
+        setTimeout(() => {
+            contactMessage.textContent = ''
+        }, 5000)
+        contactForm.reset()
     }, () => {
-        // Show error message
         contactMessage.textContent = 'Message not sent (service error) ❌'
     })
-
 }
 contactForm.addEventListener('submit', sendEmail)
 
 /*=============== SHOW SCROLL UP ===============*/ 
 const scrollUp = () =>{
 	const scrollUp = document.getElementById('scroll-up')
-    // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scrollup class
 	this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
 						: scrollUp.classList.remove('show-scroll')
 }
 window.addEventListener('scroll', scrollUp)
 
-
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 const sections = document.querySelectorAll('section[id]')
-    
+
 const scrollActive = () =>{
   	const scrollDown = window.scrollY
 
@@ -99,37 +83,28 @@ const scrollActive = () =>{
 }
 window.addEventListener('scroll', scrollActive)
 
-
 /*=============== DARK LIGHT THEME ===============*/ 
 const themeButton = document.getElementById('theme-button')
 const darkTheme = 'dark-theme'
 const iconTheme = 'ri-sun-line'
 
-// Previously selected topic (if user selected)
 const selectedTheme = localStorage.getItem('selected-theme')
 const selectedIcon = localStorage.getItem('selected-icon')
 
-// We obtain the current theme that the interface has by validating the dark-theme class
 const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light'
 const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'ri-moon-line' : 'ri-sun-line'
 
-// We validate if the user previously chose a topic
 if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
   document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](darkTheme)
   themeButton.classList[selectedIcon === 'ri-moon-line' ? 'add' : 'remove'](iconTheme)
 }
 
-// Activate / deactivate the theme manually with the button
 themeButton.addEventListener('click', () => {
-    // Add or remove the dark / icon theme
     document.body.classList.toggle(darkTheme)
     themeButton.classList.toggle(iconTheme)
-    // We save the theme and the current icon that the user chose
     localStorage.setItem('selected-theme', getCurrentTheme())
     localStorage.setItem('selected-icon', getCurrentIcon())
 })
-
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
 const sr = ScrollReveal({
@@ -137,7 +112,6 @@ const sr = ScrollReveal({
     distance: '60px',
     duration: 2500,
     delay: 400,
-    // reset: true // Animations repeat
 })
 
 sr.reveal(`.home__perfil, .about__image, .contact__mail`, {origin:`right`})
@@ -154,6 +128,7 @@ sr.reveal(`.resume__card`, {
   distance: '40px',
   duration: 800,
 });
+
 /*=============== SCROLL REVEAL ANIMATION FOR SKILLS ===============*/
 const srSkills = ScrollReveal({
     origin: 'bottom',
@@ -161,40 +136,35 @@ const srSkills = ScrollReveal({
     duration: 1000,
     delay: 200,
     reset: false
-  });
-  
-  srSkills.reveal('.skills__container .skill__item', {
-    interval: 100
-  });
+});
+srSkills.reveal('.skills__container .skill__item', { interval: 100 });
 
-  function toggleCerts() {
-    const moreCerts = document.getElementById("more-certs");
-    const toggleBtn = document.getElementById("cert-toggle");
-  
-    if (moreCerts.classList.contains("hidden")) {
-      moreCerts.classList.remove("hidden");
-      toggleBtn.innerText = "View Less";
-    } else {
-      moreCerts.classList.add("hidden");
-      toggleBtn.innerText = "View More";
-    }
+function toggleCerts() {
+  const moreCerts = document.getElementById("more-certs");
+  const toggleBtn = document.getElementById("cert-toggle");
+
+  if (moreCerts.classList.contains("hidden")) {
+    moreCerts.classList.remove("hidden");
+    toggleBtn.innerText = "View Less";
+  } else {
+    moreCerts.classList.add("hidden");
+    toggleBtn.innerText = "View More";
   }
-// View More toggle for certifications
-// View More toggle for certifications
+}
+
 const toggleBtn = document.getElementById("toggleCerts");
 const hiddenCerts = document.querySelectorAll(".cert__hidden");
 
 toggleBtn.addEventListener("click", () => {
   hiddenCerts.forEach(cert => {
     cert.classList.toggle("cert__hidden");
-    // Re-apply ScrollReveal animation to newly revealed cards
     if (!cert.classList.contains("cert__hidden")) {
       ScrollReveal().reveal(cert, {
         origin: "bottom",
         distance: "40px",
         duration: 1000,
         interval: 200,
-        reset: false // Prevent re-animation on subsequent toggles
+        reset: false
       });
     }
   });
@@ -202,7 +172,6 @@ toggleBtn.addEventListener("click", () => {
     toggleBtn.textContent === "View More" ? "View Less" : "View More";
 });
 
-// Initial ScrollReveal animation for visible cards
 ScrollReveal().reveal(".cert__reveal:not(.cert__hidden)", {
   origin: "bottom",
   distance: "40px",
@@ -210,21 +179,19 @@ ScrollReveal().reveal(".cert__reveal:not(.cert__hidden)", {
   interval: 200,
 });
 
-// ScrollReveal animation for coding profiles
 ScrollReveal().reveal(".coding__reveal", {
-    origin: "bottom",
-    distance: "40px",
-    duration: 1000,
-    interval: 200,
-  });
+  origin: "bottom",
+  distance: "40px",
+  duration: 1000,
+  interval: 200,
+});
 
-// ScrollReveal animation for day in my life
 ScrollReveal().reveal(".day__reveal", {
-    origin: "bottom",
-    distance: "40px",
-    duration: 1000,
-    interval: 200,
-  });
+  origin: "bottom",
+  distance: "40px",
+  duration: 1000,
+  interval: 200,
+});
 
 // Active link on scroll with Contact Me exception
 document.addEventListener('scroll', () => {
@@ -234,7 +201,7 @@ document.addEventListener('scroll', () => {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        const scrollPosition = window.scrollY + 100; // Add offset to trigger early
+        const scrollPosition = window.scrollY + 100;
 
         if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
             navLinks.forEach(link => {
@@ -260,6 +227,3 @@ toggleButton.addEventListener('click', () => {
     });
     toggleButton.textContent = isExpanded ? 'View Less' : 'View More';
 });
-
-  
-  
